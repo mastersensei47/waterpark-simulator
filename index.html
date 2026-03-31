@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resident evil 4 R - MS47</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, sans-serif;
+}
+
+body{
+  background:#0e0e0e;
+  color:white;
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+  width:100%;
+  background: rgba(17, 17, 17, 0.95);
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:1000;
+  border-bottom: 1px solid #333;
+}
+
+.nav-container{
+  max-width:1400px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 20px;
+}
+
+.logo{
+  font-size:24px;
+  font-weight:bold;
+  color: #fff;
+  text-shadow: 0 0 10px #ff0000;
+  text-decoration: none;
+}
+
+.nav-links{
+  display:flex;
+  gap:15px;
+  align-items: center;
+}
+
+.nav-links a{
+  color:#ccc;
+  text-decoration:none;
+  font-weight:bold;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition:0.3s;
+}
+
+.btn-mas-juegos { background: #333; border: 1px solid #444; }
+.btn-jugar { border: 1px solid #00ff00; color: #00ff00 !important; }
+
+/* ===== HERO (LOS 3 VIDEOS) ===== */
+.hero{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  flex-wrap:wrap;
+  background-image:url("fondo.jpg");
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 450px;
+  padding: 40px 30px;
+  border-radius:12px;
+  margin-bottom: 30px;
+}
+
+.video{ flex:1; min-width:280px; }
+.video iframe{ width:100%; height:250px; border-radius:12px; box-shadow:0 0 25px black; border:none; }
+
+.titulo{ flex:1; text-align:center; min-width:250px; }
+.titulo h1{ font-size:28px; margin-top: 25px; margin-bottom:5px; text-shadow: 2px 2px 4px black; }
+.titulo p{ color:#eee; font-weight: bold; text-shadow: 1px 1px 3px black; }
+
+.video-centro{ margin-bottom:15px; display:flex; justify-content:center; }
+.video-centro iframe{ width:100%; max-width:400px; height:220px; border-radius:14px; box-shadow:0 0 25px rgba(255,0,0,0.4); border:none; }
+
+/* ===== BOTONES DE DESCARGA ===== */
+.partes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0 30px 0;
+}
+
+.partes-grid a {
+  background: #1b1b1b;
+  padding: 12px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  border: 1px solid #333;
+}
+.partes-grid a:hover { background: #ff0000; }
+
+/* ===== ACORDEONES ===== */
+.acordeon{
+  background:#111;
+  border-radius:10px;
+  margin-bottom:15px;
+  border:1px solid #222;
+  overflow:hidden;
+}
+.acordeon-header{ 
+  padding:15px; 
+  cursor:pointer; 
+  font-weight:bold; 
+  background:#1b1b1b; 
+  display:flex; 
+  justify-content:space-between; 
+}
+.acordeon-content{ max-height:0; overflow:hidden; transition:max-height 0.4s ease; }
+
+/* ===== INFO Y REQUISITOS ===== */
+main{ margin-top:80px; padding:20px; max-width:1300px; margin-left:auto; margin-right:auto; }
+
+.seccion-detalles {
+  margin-top: 40px;
+  border-top: 1px solid #222;
+  padding-top: 30px;
+}
+
+.info-lista { list-style: none; margin-bottom: 30px; }
+.info-lista li { margin-bottom: 10px; font-size: 15px; }
+.info-lista strong { color: #fff; margin-right: 5px; }
+
+/* ===== GALERIA ===== */
+.galeria-capturas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+.galeria-capturas img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #333;
+  transition: 0.3s;
+}
+.galeria-capturas img:hover { transform: scale(1.02); border-color: red; }
+
+@media(max-width:1000px){
+  .hero{ flex-direction:column; padding: 20px; background-size: cover; }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="logo">MS47</a>
+    <div class="nav-links">
+      <a href="categorias.html" class="btn-mas-juegos">🎮 <span>Más Juegos</span></a>
+      <a href="https://gam.onl/" target="_blank" class="btn-jugar">🕹️ <span>Jugar Online</span></a>
+      <a href="https://www.youtube.com/@mastersensei-47" target="_blank">🎬 <span>YouTube</span></a>
+      <a href="https://www.instagram.com/master__sensei47" target="_blank">📸 <span>Instagram</span></a>
+      <a href="https://www.tiktok.com/@mastersensei47" target="_blank">📱 <span>TikTok</span></a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<section class="hero">
+  <div class="video"><iframe src="https://www.youtube.com/embed/K8EKDkUtxJc" allowfullscreen></iframe></div>
+  <div class="titulo">
+    <div class="video-centro"><iframe src="https://www.youtube.com/embed/yc_narOXOOY" allowfullscreen></iframe></div>
+    <h1>RESIDENT EVIL 4</h1>
+    <p></p>
+  </div>
+  <div class="video"><iframe src="https://www.youtube.com/embed/wmozuemP_-I" allowfullscreen></iframe></div>
+</section>
+
+<h2>DESCARGAR (131 GB)</h2>
+<section class="partes-grid">
+<a href="https://www.mediafire.com/file/ox6zcske06mb5tb/RESIDENT_EVIL_4.7z.001/file">Parte 1</a> <a href="https://www.mediafire.com/file/ejuhqhlgzmcx7ex/RESIDENT+EVIL+4.7z.002/file">Parte 2</a> <a href="https://www.mediafire.com/file/i55xefbatm9dhkw/RESIDENT_EVIL_4.7z.003/file">Parte 3</a> <a href="https://www.mediafire.com/file/xhjucbk4flk3qdy/RESIDENT_EVIL_4.7z.004/file">Parte 4</a>
+<a href="https://www.mediafire.com/file/emi0def0gvaa9dm/RESIDENT_EVIL_4.7z.005/file">Parte 5</a> <a href="https://www.mediafire.com/file/l03xw8gvzeyx4ns/RESIDENT+EVIL+4.7z.006/file">Parte 6</a> <a href="https://www.mediafire.com/file/suqs5drh8j4t4g3/RESIDENT+EVIL+4.7z.007/file">Parte 7</a> <a href="https://www.mediafire.com/file/86o7q6hztl39zql/RESIDENT+EVIL+4.7z.008/file">Parte 8</a>
+<a href="https://www.mediafire.com/file/vo0z6cekfo0xc9h/RESIDENT+EVIL+4.7z.009/file">Parte 9</a>
+</section>
+
+<div class="acordeon">
+  <div class="acordeon-header" onclick="toggleAcordeon(this)">🎞️ GAMEPLAY <span>▼</span></div>
+  <div class="acordeon-content">
+    <iframe src="https://drive.google.com/file/d/1Cfa1dGUL_BaMdUBJIz5MQ9v3Prdpoj9m/preview" width="100%" height="450" style="border:none;"></iframe>
+  </div>
+</div>
+
+<div class="acordeon">
+  <div class="acordeon-header" onclick="toggleAcordeon(this)">🔥 CONTENIDO / DLCs <span>▼</span></div>
+  <div class="acordeon-content">
+    <ul style="padding: 20px; list-style: none; color:#ccc;">
+<li>Resident Evil 4 2023 – Separate Ways</li>
+<li>Resident Evil 4 Treasure Map: Expansion</li>
+<li>Resident Evil 4 Leon & Ashley Costumes: ‘Casual’</li>
+<li>Resident Evil 4 Leon & Ashley Costumes: ‘Romantic’</li>
+<li>Resident Evil 4 Leon Costume & Filter: ‘Hero’</li>
+<li>Resident Evil 4 Leon Costume & Filter: ‘Villain’</li>
+<li>Resident Evil 4 ‘Original Ver.’ Soundtrack Swap</li>
+<li>Resident Evil 4 Deluxe Weapon: ‘Sentinel Nine’</li>
+<li>Resident Evil 4 Deluxe Weapon: ‘Skull Shaker’</li>
+<li>Resident Evil 4 Leon Accessory: ‘Sunglasses (Sporty)’</li>
+<li>Resident Evil 4 Attache Case: ‘Gold’</li>
+<li>Resident Evil 4 Attache Case: ‘Classic’</li>
+<li>Resident Evil 4 Charm: ‘Handgun Ammo’</li>
+<li>Resident Evil 4 Charm: ‘Green Herb’</li>
+<li>Resident Evil 4 – The Mercenaries</li>
+<li>Resident Evil 4 Weapon Exclusive Upgrade Ticket x1 (A)</li>
+<li>Resident Evil 4 Weapon Exclusive Upgrade Ticket x1 (B)</li>
+<li>Resident Evil 4 Weapon Exclusive Upgrade Ticket x1 (C)</li>
+<li>Resident Evil 4 Weapon Exclusive Upgrade Ticket x1 (D)</li>
+<li>Resident Evil 4 Weapon Exclusive Upgrade Ticket x1 (E)</li>
+<li>Resident Evil 4 Weapon Exclusive Upgrade Ticket x1 (F)</li>
+<li>Resident Evil 4 Weapon Exclusive Upgrade Ticket x3 (A)</li>
+<li>Resident Evil 4 Weapon Exclusive Upgrade Ticket x3 (B)</li>
+<li>Resident Evil 4 Weapon Exclusive Upgrade Ticket x3 (C)</li>
+<li>Resident Evil 4 Weapon Exclusive Upgrade Ticket x3 (D)</li>
+<li>Resident Evil 4 Weapon Exclusive Upgrade Ticket x5 (A)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="seccion-detalles">
+  <h2 style="margin-bottom: 15px;">REQUISITOS DEL SISTEMA</h2>
+  <ul class="info-lista">
+    <li>✅ <strong>Sistema operativo:</strong> Windows 10 (64 BITS)</li>
+    <li>✅ <strong>Procesador:</strong> AMD Ryzen 3 1200 / Intel Core i5-7500</li>
+    <li>✅ <strong>Memoria RAM:</strong> 8 GB</li>
+    <li>✅ <strong>Gráficos:</strong>  AMD Radeon RX 560 with 4GB VRAM / NVIDIA GeForce GTX 1050 Ti with 4GB VRAM</li>
+    <li>✅ <strong>Almacenamiento:</strong>  140 GB temporales - 75 GB final</li>
+  </ul>
+
+  <h2 style="margin-bottom: 15px;">INFORMACIÓN DEL JUEGO</h2>
+  <ul class="info-lista">
+    <li><strong>Género:</strong> Action, Adventure</li>
+    <li><strong>Plataforma:</strong> PC</li>
+    <li><strong>Edición:</strong> Build 22154679 | Full Version + All DLCs</li>
+  </ul>
+
+  <h2 style="margin-bottom: 15px;">CAPTURAS DEL JUEGO</h2>
+  <div class="galeria-capturas">
+    <img src="captura 1.jpg" alt="Captura 1">
+    <img src="captura 2.jpg" alt="Captura 2">
+    <img src="captura 3.jpg" alt="Captura 3">
+  </div>
+</div>
+
+</main>
+
+<script>
+function toggleAcordeon(element){
+  const content = element.nextElementSibling;
+  content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + "px";
+}
+</script>
+
+</body>
+</html>

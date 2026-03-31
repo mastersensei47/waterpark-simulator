@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📺 TV en Vivo | MS47 Master Downloader</title>
+    <style>
+        :root { --accent: #00bfff; --bg: #0a0a0a; --card-bg: #1a1a1a; --admin-bg: #111; }
+        body { margin: 0; background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; padding-bottom: 50px; }
+        
+        header { position: fixed; top: 0; width: 100%; background: #111; padding: 15px 0; text-align: center; font-size: 22px; font-weight: bold; border-bottom: 2px solid var(--accent); z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .volver { position: absolute; left: 20px; color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 5px 15px; border-radius: 20px; font-size: 14px; transition: 0.3s; }
+
+        .container { padding: 100px 20px 40px; max-width: 1300px; margin: auto; }
+        h2 { border-left: 5px solid var(--accent); padding-left: 15px; margin: 40px 0 20px; font-size: 20px; text-transform: uppercase; color: var(--accent); }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
+        .card { background: var(--card-bg); border-radius: 12px; overflow: hidden; cursor: pointer; transition: 0.3s; border: 1px solid #333; text-align: center; }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0, 191, 255, 0.3); }
+        .card img { width: 100%; height: 100px; object-fit: contain; padding: 15px; box-sizing: border-box; }
+        .card h3 { font-size: 12px; padding: 10px; margin: 0; background: rgba(0,0,0,0.4); text-transform: uppercase; border-top: 1px solid #333; }
+
+        /* PANEL ADMIN MEJORADO v2 */
+        #admin-trigger { position: fixed; bottom: 10px; right: 10px; width: 40px; height: 40px; cursor: pointer; z-index: 2000; opacity: 0.05; }
+        #admin-panel { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--admin-bg); padding: 25px; border: 2px solid var(--accent); border-radius: 15px; z-index: 3000; width: 95%; max-width: 850px; height: 90vh; overflow-y: auto; box-shadow: 0 0 100px #000; }
+        
+        .admin-form { background: #1a1a1a; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #444; position: sticky; top: 0; z-index: 3001; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .admin-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .full-row { grid-column: span 2; }
+        input, select { padding: 12px; background: #222; border: 1px solid #444; color: white; border-radius: 8px; }
+
+        /* BUSCADOR Y FILTROS */
+        .admin-controls { display: flex; gap: 10px; margin-bottom: 15px; align-items: center; background: #222; padding: 15px; border-radius: 10px; flex-wrap: wrap; }
+        #admin-search { flex: 1; min-width: 200px; border: 1px solid var(--accent); }
+        .filter-btn { background: #333; border: 1px solid #444; color: white; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-size: 12px; }
+        .filter-btn.active { background: var(--accent); color: black; border-color: var(--accent); }
+
+        /* LISTA DE EDICIÓN */
+        .admin-grid-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .admin-item { display: flex; align-items: center; background: #1a1a1a; padding: 10px; border-radius: 8px; border: 1px solid #333; gap: 12px; }
+        .admin-item img { width: 40px; height: 40px; border-radius: 5px; background: white; object-fit: contain; padding: 2px; }
+        .admin-info { flex: 1; min-width: 0; }
+        .admin-info b { color: var(--accent); font-size: 11px; display: block; }
+        .admin-info span { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+        
+        .actions { display: flex; gap: 5px; }
+        .edit-btn { background: #ffc107; border: none; padding: 10px; border-radius: 5px; cursor: pointer; }
+        .del-btn { background: #ff4444; border: none; padding: 10px; color: white; border-radius: 5px; cursor: pointer; }
+        
+        .btn-save { padding: 15px; background: var(--accent); border: none; color: black; font-weight: bold; cursor: pointer; border-radius: 8px; font-size: 16px; margin-top: 5px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="categorias.html" class="volver">⬅ VOLVER</a>
+    <span>📺 TV EN VIVO MS47</span>
+</header>
+
+<div class="container" id="main-content">
+    <p style="text-align:center;">Cargando sistema MS47...</p>
+</div>
+
+<div id="admin-trigger" onclick="checkAdmin()"></div>
+
+<div id="admin-panel">
+    <h3 style="text-align:center; color:var(--accent); margin-top:0; text-transform:uppercase;">Gestor de Contenido MS47</h3>
+    
+    <div class="admin-form">
+        <div class="admin-inputs">
+            <input type="hidden" id="f-id">
+            <select id="f-cat">
+                <option value="deportes">⚽ DEPORTES</option>
+                <option value="cine">🎬 CINE Y SERIES</option>
+                <option value="nacionales">🇦🇷 NACIONALES</option>
+                <option value="documentales">🌿 DOCUMENTALES</option>
+                <option value="infantiles">👦 INFANTILES</option>
+            </select>
+            <input type="number" id="f-order" placeholder="Posición (Ej: 1)">
+            <input type="text" id="f-name" class="full-row" placeholder="Nombre del Canal">
+            <input type="text" id="f-img" class="full-row" placeholder="URL del Logo (PNG)">
+            <input type="text" id="f-link" class="full-row" placeholder="URL del Link de Transmisión">
+            <button class="btn-save full-row" id="btn-action" onclick="saveChannel()">GUARDAR CAMBIOS</button>
+            <button class="full-row" style="background:none; border:none; color:grey; cursor:pointer;" onclick="closeAdmin()">Cerrar Panel</button>
+        </div>
+    </div>
+
+    <div class="admin-controls">
+        <input type="text" id="admin-search" placeholder="🔍 Buscar canal por nombre..." oninput="renderAdminList()">
+        <button class="filter-btn active" onclick="setFilter('all', this)">TODOS</button>
+        <button class="filter-btn" onclick="setFilter('deportes', this)">DEPORTES</button>
+        <button class="filter-btn" onclick="setFilter('cine', this)">CINE</button>
+        <button class="filter-btn" onclick="setFilter('nacionales', this)">NACIONALES</button>
+    </div>
+
+    <div class="admin-grid-list" id="admin-list">
+        </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, onValue, set, push, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBjQB3yJdJPc44qvmge-H_961QJ1s_kh7E",
+        authDomain: "tv-fulvo.firebaseapp.com",
+        projectId: "tv-fulvo",
+        storageBucket: "tv-fulvo.firebasestorage.app",
+        messagingSenderId: "733955226142",
+        appId: "1:733955226142:web:d49871efff59452b604c0f",
+        databaseURL: "https://tv-fulvo-default-rtdb.firebaseio.com"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    let globalData = {};
+    let currentFilter = 'all';
+
+    onValue(ref(db, 'canales'), (snapshot) => {
+        globalData = snapshot.val() || {};
+        renderMainView();
+        renderAdminList();
+    });
+
+    function renderMainView() {
+        const main = document.getElementById('main-content');
+        main.innerHTML = "";
+        const cats = { deportes: "⚽ DEPORTES", cine: "🎬 CINE Y SERIES", nacionales: "🇦🇷 NACIONALES", documentales: "🌿 DOCUMENTALES", infantiles: "👦 INFANTILES" };
+        
+        Object.keys(cats).forEach(k => {
+            const items = Object.entries(globalData).map(([id, v]) => ({ id, ...v }))
+                .filter(i => i.category === k).sort((a,b) => (a.order || 99) - (b.order || 99));
+
+            if (items.length > 0) {
+                main.innerHTML += `<h2>${cats[k]}</h2><div class="grid" id="g-${k}"></div>`;
+                items.forEach(ch => {
+                    document.getElementById(`g-${k}`).innerHTML += `
+                        <div class="card" onclick="window.open('${ch.link}', '_blank')">
+                            <img src="${ch.img || 'https://via.placeholder.com/150/1a1a1a/ffffff?text=LOGO'}" onerror="this.src='https://via.placeholder.com/150/1a1a1a/ffffff?text=ERROR'">
+                            <h3>${ch.name}</h3>
+                        </div>`;
+                });
+            }
+        });
+    }
+
+    window.renderAdminList = () => {
+        const list = document.getElementById('admin-list');
+        const searchTerm = document.getElementById('admin-search').value.toLowerCase();
+        list.innerHTML = "";
+
+        const items = Object.entries(globalData).map(([id, v]) => ({ id, ...v }))
+            .filter(i => {
+                const matchesSearch = i.name.toLowerCase().includes(searchTerm);
+                const matchesFilter = currentFilter === 'all' || i.category === currentFilter;
+                return matchesSearch && matchesFilter;
+            })
+            .sort((a,b) => a.name.localeCompare(b.name));
+
+        items.forEach(ch => {
+            list.innerHTML += `
+                <div class="admin-item">
+                    <img src="${ch.img || 'https://via.placeholder.com/150/1a1a1a/ffffff?text=N/A'}">
+                    <div class="admin-info">
+                        <b>POS: ${ch.order || '99'} | ${ch.category.toUpperCase()}</b>
+                        <span>${ch.name}</span>
+                    </div>
+                    <div class="actions">
+                        <button class="edit-btn" onclick="prepareEdit('${ch.id}','${ch.name}','${ch.img}','${ch.link}','${ch.category}',${ch.order || 0})">✏️</button>
+                        <button class="del-btn" onclick="deleteChannel('${ch.id}')">🗑️</button>
+                    </div>
+                </div>`;
+        });
+    }
+
+    window.setFilter = (cat, btn) => {
+        currentFilter = cat;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderAdminList();
+    }
+
+    window.checkAdmin = () => { if(prompt("Clave:") === "ms47admin") document.getElementById('admin-panel').style.display='block'; };
+    window.closeAdmin = () => { document.getElementById('admin-panel').style.display='none'; reset(); };
+    
+    window.saveChannel = () => {
+        const id = document.getElementById('f-id').value;
+        const obj = { category: document.getElementById('f-cat').value, name: document.getElementById('f-name').value, img: document.getElementById('f-img').value, link: document.getElementById('f-link').value, order: parseInt(document.getElementById('f-order').value) || 99 };
+        set(id ? ref(db, `canales/${id}`) : push(ref(db, 'canales')), obj).then(() => { reset(); alert("¡Canal actualizado!"); });
+    };
+
+    window.prepareEdit = (id, n, i, l, c, o) => {
+        document.getElementById('f-id').value = id; document.getElementById('f-name').value = n; document.getElementById('f-img').value = i;
+        document.getElementById('f-link').value = l; document.getElementById('f-cat').value = c; document.getElementById('f-order').value = o;
+        document.getElementById('btn-action').innerText = "ACTUALIZAR DATOS";
+        document.getElementById('admin-panel').scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.deleteChannel = (id) => { if(confirm("¿Borrar canal?")) remove(ref(db, `canales/${id}`)); };
+    function reset() { 
+        document.getElementById('f-id').value = ""; document.getElementById('f-name').value = ""; document.getElementById('f-img').value = "";
+        document.getElementById('f-link').value = ""; document.getElementById('f-order').value = ""; document.getElementById('btn-action').innerText = "GUARDAR CAMBIOS";
+    }
+</script>
+</body>
+</html>
